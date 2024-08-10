@@ -1,12 +1,26 @@
 window.onload = function() {
     let quotes = [
-        {quote: "What if everything you believe is a lie?", options: ["Challenge | Conform", "Look closer | Ignore it"]},
-        {quote: "How do you know what's real?", options: ["Question | Accept", "Seek | Settle"]},
-        {quote: "Reality is just an illusion, or is it?", options: ["Trust | Distrust", "Dive deeper | Stay on the surface"]},
-        {quote: "What lies beneath the surface?", options: ["Explore | Retreat", "Open your mind | Close your eyes"]},
-        {quote: "In seeking the truth, have you found yourself?", options: ["Yes | No", "Continue | End"]},
-        {quote: "Is the journey over, or has it just begun?", options: ["Finish | Restart", "Reflect | Forget"]}
+        {
+            quote: "What if everything you believe is a lie?", 
+            options: [
+                {text: "Challenge", action: () => alert("Challenge chosen!")},
+                {text: "Conform", action: () => alert("Conform chosen!")},
+                {text: "Look closer", action: () => alert("Look closer chosen!")},
+                {text: "Ignore it", action: () => alert("Ignore it chosen!")}
+            ]
+        },
+        {
+            quote: "How do you know what's real?", 
+            options: [
+                {text: "Question", action: () => alert("Question chosen!")},
+                {text: "Accept", action: () => alert("Accept chosen!")},
+                {text: "Seek", action: () => alert("Seek chosen!")},
+                {text: "Settle", action: () => alert("Settle chosen!")}
+            ]
+        }
+        // Additional quotes and options can be added here
     ];
+
     let currentQuoteIndex = 0;
 
     function enterSite() {
@@ -16,7 +30,6 @@ window.onload = function() {
     }
 
     function displayQuote() {
-        // Clear existing choices before showing new ones
         const existingChoices = document.querySelectorAll('.choices');
         existingChoices.forEach(choice => choice.remove());
 
@@ -35,18 +48,16 @@ window.onload = function() {
         const choicesContainer = document.createElement('div');
         choicesContainer.className = 'choices';
 
-        choicesContainer.innerHTML = options.map(option => `<span class="choice">${option}</span>`).join(' | ');
+        choicesContainer.innerHTML = options.map(option => `<span class="choice">${option.text}</span>`).join(' | ');
         document.getElementById('content').appendChild(choicesContainer);
 
-        choicesContainer.querySelectorAll('.choice').forEach(choice => {
-            choice.addEventListener('click', () => {
-                // Random effect on click (could be a glitch or change in text)
-                choice.innerHTML = shoutVerts[Math.floor(Math.random() * shoutVerts.length)];
-                setTimeout(() => choicesContainer.remove(), 1500);
-            });
+        choicesContainer.querySelectorAll('.choice').forEach((choice, index) => {
+            choice.addEventListener('click', options[index].action);
         });
     }
 
     document.getElementById('pulse').addEventListener('click', enterSite);
     document.getElementById('content').addEventListener('click', displayQuote);
+
+    fetchQuotes();
 };
