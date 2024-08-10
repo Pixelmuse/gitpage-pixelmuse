@@ -1,7 +1,7 @@
 window.onload = function() {
     let quotes = [];
     let currentQuoteIndex = 0;
-    let blibVerts = [
+    let shoutVerts = [
         "SEX", "SATAN", "MONEY", "ADS", "INTERFACE", "ACCESS",
         "ENTRANCE", "ANSWERS", "PLACE", "NO ART", "WISDOM",
         "CHANCE", "MAINTENANCE", "SHIT", "PROMISES", "COMMITMENT",
@@ -33,7 +33,7 @@ window.onload = function() {
             element.addEventListener('click', () => {
                 const flashText = document.createElement('div');
                 flashText.className = 'flash-effect';
-                flashText.textContent = blibVerts[Math.floor(Math.random() * blibVerts.length)];
+                flashText.textContent = shoutVerts[Math.floor(Math.random() * shoutVerts.length)];
                 document.body.appendChild(flashText);
                 setTimeout(() => flashText.remove(), 500);
             });
@@ -64,7 +64,32 @@ window.onload = function() {
         applyRandomEffect(quoteText);
         randomBackgroundFlash();
 
+        // Add cryptic choices
+        if (Math.random() > 0.5) { // 50% chance to show choices
+            showChoices();
+        }
+
         currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+    }
+
+    function showChoices() {
+        const choicesContainer = document.createElement('div');
+        choicesContainer.className = 'choices';
+        const choices = [
+            '<span class="choice">if (1 + 1 == 3) { proceed = true; }</span>',
+            '<span class="choice">answers | possibly | something</span>',
+            '<span class="choice">+ | -</span>'
+        ];
+
+        choicesContainer.innerHTML = choices.join(' | ');
+        document.getElementById('content').appendChild(choicesContainer);
+
+        choicesContainer.querySelectorAll('.choice').forEach(choice => {
+            choice.addEventListener('click', () => {
+                choice.innerHTML = shoutVerts[Math.floor(Math.random() * shoutVerts.length)];
+                setTimeout(() => choicesContainer.remove(), 1500);
+            });
+        });
     }
 
     document.getElementById('pulse').addEventListener('click', enterSite);
