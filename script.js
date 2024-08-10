@@ -4,14 +4,14 @@ window.onload = function() {
             quote: "What if everything you believe is a lie?", 
             options: [
                 {text: "Challenge", action: () => showMessage("You chose to challenge the norm.")},
-                {text: "Conform", action: () => showMessage("You chose to conform to the world around you.")}
+                {text: "Conform", action: () => redirectToEnd()}
             ]
         },
         {
             quote: "How do you know what's real?", 
             options: [
                 {text: "Question", action: () => showMessage("Question everything.")},
-                {text: "Accept", action: () => showMessage("Accept what you see.")}
+                {text: "Accept", action: () => redirectToEnd()}
             ]
         }
         // Additional quotes and options can be added here
@@ -60,6 +60,10 @@ window.onload = function() {
         document.getElementById('content').appendChild(messageElement);
 
         setTimeout(() => messageElement.remove(), 2000);
+    }
+
+    function redirectToEnd() {
+        window.location.href = "end.html";
     }
 
     document.getElementById('pulse').addEventListener('click', enterSite);
