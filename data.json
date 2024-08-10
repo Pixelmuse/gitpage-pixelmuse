@@ -1,0 +1,32 @@
+[
+    {
+        "quote": "Those who seek answers find only more questions.",
+        "options": [
+            "if (true) { proceed(); }",
+            "Why? | Why not?",
+            "+ | -"
+        ]
+    },
+    {
+        "quote": "The path is unclear, yet we move forward.",
+        "options": [
+            "answers | possibly | something",
+            "enter | stay | leave"
+        ]
+    },
+    {
+        "quote": "In the void, truth is meaningless.",
+        "options": [
+            "truth | lie",
+            "up | down",
+            "yes | no"
+        ]
+    },
+    {
+        "quote": "Control is an illusion, but it's comforting.",
+        "options": [
+            "control | chaos",
+            "order | disorder"
+        ]
+    }
+]
