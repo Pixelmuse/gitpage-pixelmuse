@@ -1,59 +1,92 @@
-window.onload = function() {
-    let quotes = [];
-    let currentQuoteIndex = 0;
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    color: #fff;
+    font-family: 'Fira Mono', monospace;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: background-color 0.5s ease;
+}
 
-    function fetchQuotes() {
-        fetch('data.json')
-            .then(response => response.json())
-            .then(data => {
-                quotes = data;
-                displayQuote();
-            })
-            .catch(error => console.log('Error loading data:', error));
+#pulse {
+    width: 20px;
+    height: 20px;
+    background-color: #ff0033;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+    cursor: pointer;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
     }
-
-    function enterSite() {
-        document.getElementById('landing').classList.add('hidden');
-        document.getElementById('content').classList.remove('hidden');
-        displayQuote();
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
     }
+}
 
-    function applyRandomEffect(element) {
-        const effects = ['fade-effect', 'shadow-effect'];
-        const randomEffect = effects[Math.floor(Math.random() * effects.length)];
-        element.classList.add(randomEffect);
+.hidden {
+    display: none;
+}
 
-        // Handle click to show flash text
-        element.addEventListener('click', () => {
-            const flashText = document.createElement('div');
-            flashText.className = 'flash-effect';
-            flashText.textContent = 'SEEK';  // Example flash text
-            document.body.appendChild(flashText);
-            setTimeout(() => flashText.remove(), 500); // Remove after flash
-        });
+#content {
+    text-align: center;
+    padding: 20px;
+    position: absolute;
+    width: 90%; 
+    height: 90%; 
+    left: 5%; 
+    top: 5%; 
+}
+
+#quoteText {
+    margin-bottom: 10px;
+    max-width: 90vw;
+    word-wrap: break-word;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+}
+
+.flash-effect {
+    color: grey;
+    font-weight: bold;
+    font-size: 2vw;
+    opacity: 0;
+    animation: flash 0.5s forwards;
+}
+
+@keyframes flash {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.fade-effect {
+    opacity: 0;
+    animation: fadeIn 1.5s forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.shadow-effect {
+    text-shadow: 2px 2px 8px #ff0033;
+}
+
+@media (max-width: 600px) {
+    #quoteText {
+        font-size: 2vw;
     }
-
-    function displayQuote() {
-        if (quotes.length === 0) return;
-
-        let quoteText = document.getElementById('quoteText');
-
-        let randomFontSize = Math.floor(Math.random() * 3) + 3;
-        let fonts = ['Fira Mono', 'Courier New', 'Lucida Console', 'Monaco', 'Consolas'];
-        let randomFont = fonts[Math.floor(Math.random() * fonts.length)];
-
-        quoteText.style.fontSize = `${randomFontSize}vw`;
-        quoteText.style.fontFamily = randomFont;
-
-        quoteText.innerHTML = `${quotes[currentQuoteIndex].quote}`;
-
-        applyRandomEffect(quoteText);
-
-        currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
-    }
-
-    document.getElementById('pulse').addEventListener('click', enterSite);
-    document.getElementById('content').addEventListener('click', displayQuote);
-
-    fetchQuotes();
-};
+}
