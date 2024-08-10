@@ -10,6 +10,7 @@ body, html {
     justify-content: center;
     align-items: center;
     text-align: center;
+    transition: background-color 0.5s ease;
 }
 
 #pulse {
@@ -47,7 +48,6 @@ body, html {
 }
 
 #quoteText {
-    font-size: 4vw;
     margin-bottom: 10px;
     max-width: 90vw;
     word-wrap: break-word;
@@ -55,13 +55,12 @@ body, html {
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
-    transition: all 0.5s ease;
 }
 
 .flash-effect {
     color: grey;
     font-weight: bold;
-    font-size: 6vw;
+    font-size: 2vw;
     opacity: 0;
     animation: flash 0.5s forwards;
 }
@@ -86,8 +85,24 @@ body, html {
     text-shadow: 2px 2px 8px #ff0033;
 }
 
+.choices {
+    margin-top: 20px;
+    font-size: 1.5vw;
+}
+
+.choice {
+    margin: 0 10px;
+    cursor: pointer;
+    color: #ff0033;
+    text-decoration: underline;
+}
+
 @media (max-width: 600px) {
     #quoteText {
-        font-size: 6vw;
+        font-size: 2vw;
+    }
+
+    .choices {
+        font-size: 3vw;
     }
 }
