@@ -52,4 +52,49 @@ window.onload = function() {
     function displayQuote() {
         if (quotes.length === 0) return;
 
-        // Clear existi
+        // Clear existing choices before showing new ones
+        const existingChoices = document.querySelectorAll('.choices');
+        existingChoices.forEach(choice => choice.remove());
+
+        let quoteText = document.getElementById('quoteText');
+
+        let randomFontSize = Math.random() * (2 - 1) + 1; // Random font size between 1vw and 2vw
+        let fonts = ['Fira Mono', 'Courier New', 'Lucida Console', 'Monaco', 'Consolas'];
+        let randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+
+        quoteText.style.fontSize = `${randomFontSize}vw`;
+        quoteText.style.fontFamily = randomFont;
+
+        let currentQuote = quotes[currentQuoteIndex];
+        quoteText.innerHTML = `${currentQuote.quote}`;
+
+        applyRandomEffect(quoteText);
+        randomBackgroundFlash();
+
+        if (currentQuote.options) {
+            showChoices(currentQuote.options);
+        }
+
+        currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+    }
+
+    function showChoices(options) {
+        const choicesContainer = document.createElement('div');
+        choicesContainer.className = 'choices';
+
+        choicesContainer.innerHTML = options.map(option => `<span class="choice">${option}</span>`).join(' | ');
+        document.getElementById('content').appendChild(choicesContainer);
+
+        choicesContainer.querySelectorAll('.choice').forEach(choice => {
+            choice.addEventListener('click', () => {
+                choice.innerHTML = shoutVerts[Math.floor(Math.random() * shoutVerts.length)];
+                setTimeout(() => choicesContainer.remove(), 1500);
+            });
+        });
+    }
+
+    document.getElementById('pulse').addEventListener('click', enterSite);
+    document.getElementById('content').addEventListener('click', displayQuote);
+
+    fetchQuotes();
+};
