@@ -52,6 +52,10 @@ window.onload = function() {
     function displayQuote() {
         if (quotes.length === 0) return;
 
+        // Clear any existing choices
+        const existingChoices = document.querySelector('.choices');
+        if (existingChoices) existingChoices.remove();
+
         let quoteText = document.getElementById('quoteText');
 
         let randomFontSize = Math.random() * (2 - 1) + 1; // Random font size between 1vw and 2vw
