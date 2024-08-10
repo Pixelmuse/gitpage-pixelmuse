@@ -16,11 +16,35 @@ window.onload = function() {
     }
 
     function displayQuote() {
+        // Clear existing choices before showing new ones
+        const existingChoices = document.querySelectorAll('.choices');
+        existingChoices.forEach(choice => choice.remove());
+
         let quoteText = document.getElementById('quoteText');
         let currentQuote = quotes[currentQuoteIndex];
         quoteText.textContent = currentQuote.quote;
 
+        if (currentQuote.options) {
+            showChoices(currentQuote.options);
+        }
+
         currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+    }
+
+    function showChoices(options) {
+        const choicesContainer = document.createElement('div');
+        choicesContainer.className = 'choices';
+
+        choicesContainer.innerHTML = options.map(option => `<span class="choice">${option}</span>`).join(' | ');
+        document.getElementById('content').appendChild(choicesContainer);
+
+        choicesContainer.querySelectorAll('.choice').forEach(choice => {
+            choice.addEventListener('click', () => {
+                // Random effect on click (could be a glitch or change in text)
+                choice.innerHTML = shoutVerts[Math.floor(Math.random() * shoutVerts.length)];
+                setTimeout(() => choicesContainer.remove(), 1500);
+            });
+        });
     }
 
     document.getElementById('pulse').addEventListener('click', enterSite);
