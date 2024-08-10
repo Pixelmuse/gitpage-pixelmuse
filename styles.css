@@ -42,14 +42,15 @@ body, html {
 }
 
 #quoteText {
-    font-size: 6vw;
+    font-size: 4vw;
     margin-bottom: 10px;
+    max-width: 90vw; /* Ensure content stays within the screen */
+    word-wrap: break-word; /* Prevents text from running off the screen */
     position: absolute;
-    max-width: 90vw;
 }
 
 @media (max-width: 600px) {
     #quoteText {
-        font-size: 8vw;
+        font-size: 6vw;
     }
 }
