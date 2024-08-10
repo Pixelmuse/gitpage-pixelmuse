@@ -23,13 +23,13 @@ window.onload = function() {
 
         let quoteText = document.getElementById('quoteText');
 
-        let randomX = Math.floor(Math.random() * 80) + 10;
-        let randomY = Math.floor(Math.random() * 80) + 10;
+        let randomX = Math.floor(Math.random() * 70) + 15;
+        let randomY = Math.floor(Math.random() * 70) + 15;
 
         quoteText.style.left = `${randomX}%`;
         quoteText.style.top = `${randomY}%`;
 
-        quoteText.innerHTML = `"${quotes[currentQuoteIndex].quote}"`;
+        quoteText.innerHTML = `${quotes[currentQuoteIndex].quote}`; // Removed quotation marks
 
         currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
     }
