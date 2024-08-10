@@ -3,19 +3,15 @@ window.onload = function() {
         {
             quote: "What if everything you believe is a lie?", 
             options: [
-                {text: "Challenge", action: () => alert("Challenge chosen!")},
-                {text: "Conform", action: () => alert("Conform chosen!")},
-                {text: "Look closer", action: () => alert("Look closer chosen!")},
-                {text: "Ignore it", action: () => alert("Ignore it chosen!")}
+                {text: "Challenge", action: () => showMessage("You chose to challenge the norm.")},
+                {text: "Conform", action: () => showMessage("You chose to conform to the world around you.")}
             ]
         },
         {
             quote: "How do you know what's real?", 
             options: [
-                {text: "Question", action: () => alert("Question chosen!")},
-                {text: "Accept", action: () => alert("Accept chosen!")},
-                {text: "Seek", action: () => alert("Seek chosen!")},
-                {text: "Settle", action: () => alert("Settle chosen!")}
+                {text: "Question", action: () => showMessage("Question everything.")},
+                {text: "Accept", action: () => showMessage("Accept what you see.")}
             ]
         }
         // Additional quotes and options can be added here
@@ -56,8 +52,16 @@ window.onload = function() {
         });
     }
 
+    function showMessage(message) {
+        // Display the message or trigger some other subtle visual effect
+        const messageElement = document.createElement('p');
+        messageElement.className = 'message';
+        messageElement.textContent = message;
+        document.getElementById('content').appendChild(messageElement);
+
+        setTimeout(() => messageElement.remove(), 2000);
+    }
+
     document.getElementById('pulse').addEventListener('click', enterSite);
     document.getElementById('content').addEventListener('click', displayQuote);
-
-    fetchQuotes();
 };
