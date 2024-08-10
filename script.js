@@ -32,7 +32,7 @@ window.onload = function() {
         quoteText.style.left = `${randomX}%`;
         quoteText.style.top = `${randomY}%`;
 
-        quoteText.innerHTML = `"${quotes[currentQuoteIndex].quote}"`;
+        quoteText.innerHTML = `${quotes[currentQuoteIndex].quote}`;
         quoteDate.innerHTML = `${quotes[currentQuoteIndex].date}`;
 
         currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
