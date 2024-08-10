@@ -2,7 +2,6 @@ window.onload = function() {
     let quotes = [];
     let currentQuoteIndex = 0;
 
-    // Function to fetch quotes from data.json
     function fetchQuotes() {
         fetch('data.json')
             .then(response => response.json())
@@ -23,24 +22,20 @@ window.onload = function() {
         if (quotes.length === 0) return;
 
         let quoteText = document.getElementById('quoteText');
-        let quoteDate = document.getElementById('quoteDate');
 
-        let randomX = Math.floor(Math.random() * 80) + 10; // Random position between 10% and 90% of screen width
-        let randomY = Math.floor(Math.random() * 80) + 10; // Random position between 10% and 90% of screen height
+        let randomX = Math.floor(Math.random() * 80) + 10;
+        let randomY = Math.floor(Math.random() * 80) + 10;
 
-        quoteText.style.position = 'absolute';
         quoteText.style.left = `${randomX}%`;
         quoteText.style.top = `${randomY}%`;
 
-        quoteText.innerHTML = `${quotes[currentQuoteIndex].quote}`;
-        quoteDate.innerHTML = `${quotes[currentQuoteIndex].date}`;
+        quoteText.innerHTML = `"${quotes[currentQuoteIndex].quote}"`;
 
         currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
     }
 
-    document.getElementById('landing').addEventListener('click', enterSite);
+    document.getElementById('pulse').addEventListener('click', enterSite);
     document.getElementById('content').addEventListener('click', displayQuote);
 
-    // Initial fetch
     fetchQuotes();
 };
