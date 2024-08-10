@@ -22,14 +22,15 @@ window.onload = function() {
         if (quotes.length === 0) return;
 
         let quoteText = document.getElementById('quoteText');
+        
+        let randomFontSize = Math.floor(Math.random() * 3) + 3; // Random font size between 3vw and 6vw
+        let fonts = ['Fira Mono', 'Courier New', 'Lucida Console', 'Monaco', 'Consolas'];
+        let randomFont = fonts[Math.floor(Math.random() * fonts.length)];
 
-        let randomX = Math.floor(Math.random() * 70) + 15;
-        let randomY = Math.floor(Math.random() * 70) + 15;
+        quoteText.style.fontSize = `${randomFontSize}vw`;
+        quoteText.style.fontFamily = randomFont;
 
-        quoteText.style.left = `${randomX}%`;
-        quoteText.style.top = `${randomY}%`;
-
-        quoteText.innerHTML = `${quotes[currentQuoteIndex].quote}`; // Removed quotation marks
+        quoteText.innerHTML = `${quotes[currentQuoteIndex].quote}`;
 
         currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
     }
