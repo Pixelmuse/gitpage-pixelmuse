@@ -50,22 +50,44 @@ body, html {
     font-size: 4vw;
     margin-bottom: 10px;
     max-width: 90vw;
-    max-height: 90vh;
     word-wrap: break-word;
     position: absolute;
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
-    animation: glitch 1s infinite alternate;
+    transition: all 0.5s ease;
 }
 
-@keyframes glitch {
-    0% {
-        clip: rect(24px, 9999px, 75px, 0);
+.flash-effect {
+    color: grey;
+    font-weight: bold;
+    font-size: 6vw;
+    opacity: 0;
+    animation: flash 0.5s forwards;
+}
+
+@keyframes flash {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.fade-effect {
+    opacity: 0;
+    animation: fadeIn 1.5s forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.shadow-effect {
+    text-shadow: 2px 2px 8px #ff0033;
+}
+
+@media (max-width: 600px) {
+    #quoteText {
+        font-size: 6vw;
     }
-    20% {
-        clip: rect(15px, 9999px, 80px, 0);
-        transform: translate(-50%, -50%) skew(5deg);
-    }
-    40% {
-        clip: rect(3
+}
