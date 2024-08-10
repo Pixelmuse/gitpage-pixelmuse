@@ -3,35 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pixelmuse's Rant Wall</title>
-    <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        .quote { margin-bottom: 20px; }
-        .quote p { margin: 0; }
-        .author { font-weight: bold; }
-        .date { font-size: 0.9em; color: #777; }
-    </style>
+    <title>Quotes Journal</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Quotes Journal</h1>
-    <div id="quotes"></div>
+    <div id="landing" onclick="enterSite()">
+        <div id="pulse"></div>
+    </div>
 
-    <script>
-        fetch('data.json')
-            .then(response => response.json())
-            .then(data => {
-                const quotesDiv = document.getElementById('quotes');
-                data.forEach(item => {
-                    const quoteElement = document.createElement('div');
-                    quoteElement.className = 'quote';
-                    quoteElement.innerHTML = `
-                        <p>"${item.quote}"</p>
-                        <p class="author">- ${item.author}</p>
-                        <p class="date">${item.date}</p>
-                    `;
-                    quotesDiv.appendChild(quoteElement);
-                });
-            });
-    </script>
+    <div id="content" class="hidden">
+        <div id="quoteBox">
+            <p id="quoteText"></p>
+            <p id="quoteDate"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
