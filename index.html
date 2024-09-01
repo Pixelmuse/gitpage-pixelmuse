@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pulsing Rainbow Circle</title>
+    <title>You are here</title> <!-- Updated title -->
     <style>
         body {
             margin: 0;
@@ -55,14 +55,11 @@
 
         .text-container {
             position: absolute;
-            color: darkgrey;
+            color: #666666; /* Darker grey color */
             font-size: 2em;
-            font-weight: 900; /* Thicker bold font */
+            font-family: 'Impact', 'Arial Black', sans-serif; /* Bold, thick font similar to Impact */
             text-align: center;
             width: 100%;
-            top: 80%;
-            left: 50%;
-            transform: translateX(-50%);
             pointer-events: none;
             opacity: 0; /* Start invisible */
             animation: textFlash 2s ease-in-out; /* Flash and fade effect */
@@ -111,6 +108,13 @@
             textContainer.style.animation = 'none'; // Reset animation
             void textContainer.offsetWidth; // Trigger reflow to restart animation
             textContainer.style.animation = 'textFlash 2s ease-in-out';
+
+            // Randomize text position within the viewport
+            const randomX = Math.random() * (window.innerWidth - textContainer.clientWidth);
+            const randomY = Math.random() * (window.innerHeight - textContainer.clientHeight);
+            textContainer.style.left = `${randomX}px`;
+            textContainer.style.top = `${randomY}px`;
+
             currentIndex = (currentIndex + 1) % textArray.length;
         });
     </script>
