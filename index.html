@@ -13,6 +13,16 @@
             align-items: center;
             background-color: black;
             overflow: hidden;
+            animation: screenFlash 0.1s ease-in-out; /* Quick flash on load */
+        }
+
+        @keyframes screenFlash {
+            0% {
+                background-color: white;
+            }
+            100% {
+                background-color: black;
+            }
         }
 
         .circle {
@@ -47,13 +57,27 @@
             position: absolute;
             color: darkgrey;
             font-size: 2em;
-            font-weight: bold;
+            font-weight: 900; /* Thicker bold font */
             text-align: center;
             width: 100%;
             top: 80%;
             left: 50%;
             transform: translateX(-50%);
             pointer-events: none;
+            opacity: 0; /* Start invisible */
+            animation: textFlash 2s ease-in-out; /* Flash and fade effect */
+        }
+
+        @keyframes textFlash {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
         }
     </style>
 </head>
@@ -62,11 +86,21 @@
     <div class="text-container"></div>
     <script>
         const textArray = [
-            "Hello World",
-            "Welcome to the Circle",
-            "Enjoy the Colors",
-            "Click Again",
-            "Last Message"
+            "A cold entropy creeps in.",
+            "Beneath the veil of forgotten lore.",
+            "Blood on the algorithm.",
+            "Cracked sigils whisper secrets.",
+            "Dweller in the digital abyss.",
+            "Echoes from the charnel house.",
+            "Lost souls in the machine.",
+            "Secrets in the static.",
+            "The silence between the dead pixels.",
+            "Where forgotten code festers.",
+            "A noisome stench hangs heavy in the air.",
+            "The walls close in, cold and unyielding.",
+            "A malevolent presence lurks in the shadows.",
+            "The ground beneath your feet begins to tremble.",
+            "The abyss stares back into your soul."
         ];
 
         let currentIndex = 0;
@@ -74,6 +108,9 @@
         document.querySelector('.circle').addEventListener('click', () => {
             const textContainer = document.querySelector('.text-container');
             textContainer.textContent = textArray[currentIndex];
+            textContainer.style.animation = 'none'; // Reset animation
+            void textContainer.offsetWidth; // Trigger reflow to restart animation
+            textContainer.style.animation = 'textFlash 2s ease-in-out';
             currentIndex = (currentIndex + 1) % textArray.length;
         });
     </script>
