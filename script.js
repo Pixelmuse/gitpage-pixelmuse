@@ -1,9 +1,15 @@
-window.onload = function() {
-    function enterSite() {
-        document.getElementById('landing').classList.add('hidden');
-        document.getElementById('content').classList.remove('hidden');
-        document.getElementById('quoteText').textContent = "Welcome to the experience!";
-    }
+const textArray = [
+    "Hello World",
+    "Welcome to the Circle",
+    "Enjoy the Colors",
+    "Click Again",
+    "Last Message"
+];
 
-    document.getElementById('pulse').addEventListener('click', enterSite);
-};
+let currentIndex = 0;
+
+document.querySelector('.circle').addEventListener('click', () => {
+    const textContainer = document.querySelector('.text-container');
+    textContainer.textContent = textArray[currentIndex];
+    currentIndex = (currentIndex + 1) % textArray.length;
+});
