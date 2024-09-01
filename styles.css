@@ -70,13 +70,13 @@ body {
 
 #message {
     position: absolute;
-    color: rgba(255, 255, 255, 0.05);
-    font-size: 4rem;
-    font-weight: 900;
+    color: rgba(255, 255, 255, 0.9); /* Stronger opacity for crisper text */
+    font-size: 4rem; /* Large font size for bold effect */
+    font-weight: 900; /* Maximum boldness */
     letter-spacing: 2px;
     opacity: 0;
     transition: opacity 0.1s ease;
     z-index: 15;
     pointer-events: none;
-    text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.8);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Sharper, less blurry shadow */
 }
