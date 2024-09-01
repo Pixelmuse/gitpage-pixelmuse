@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>You are here</title> <!-- Updated title -->
+    <title>You are here</title>
     <style>
         body {
             margin: 0;
@@ -13,7 +13,7 @@
             align-items: center;
             background-color: black;
             overflow: hidden;
-            animation: screenFlash 0.1s ease-in-out; /* Quick flash on load */
+            animation: screenFlash 0.1s ease-in-out;
         }
 
         @keyframes screenFlash {
@@ -55,14 +55,14 @@
 
         .text-container {
             position: absolute;
-            color: #3333OD; /* Darker grey color */
+            color: #666666; /* Corrected dark grey color */
             font-size: 2em;
-            font-family: 'Impact', 'Arial Black', sans-serif; /* Bold, thick font similar to Impact */
+            font-family: 'Impact', 'Arial Black', sans-serif; /* Bold, thick font */
             text-align: center;
             width: 100%;
             pointer-events: none;
             opacity: 0; /* Start invisible */
-            animation: textFlash 2s ease-in-out; /* Flash and fade effect */
+            animation: textFlash 2s ease-in-out;
         }
 
         @keyframes textFlash {
@@ -83,6 +83,7 @@
     <div class="text-container"></div>
     <script>
         const textArray = [
+            "if ( 1 + 1 == 1 ){ e8z = true; }",  // Include the initial code snippet
             "A cold entropy creeps in.",
             "Beneath the veil of forgotten lore.",
             "Blood on the algorithm.",
