@@ -1,24 +1,50 @@
 body {
-    background-color: #000;
-    color: #fff;
-    font-family: 'Courier New', Courier, monospace;
-}
-
-#landing, #content {
+    margin: 0;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: black;
+    overflow: hidden;
 }
 
-#pulse {
-    width: 20px;
-    height: 20px;
-    background-color: red;
+.circle {
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
+    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    background-size: 400%;
+    animation: pulse 2s infinite, rainbow 5s infinite alternate;
     cursor: pointer;
 }
 
-.hidden {
-    display: none;
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes rainbow {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+.text-container {
+    position: absolute;
+    color: darkgrey;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    top: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
 }
