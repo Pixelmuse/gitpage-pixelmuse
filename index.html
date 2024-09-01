@@ -3,12 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>You are here</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Pulsing Rainbow Circle</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            overflow: hidden;
+        }
+
+        .circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+            background-size: 400%;
+            animation: pulse 2s infinite, rainbow 5s infinite alternate;
+            cursor: pointer;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes rainbow {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .text-container {
+            position: absolute;
+            color: darkgrey;
+            font-size: 2em;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+            top: 80%;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
     <div class="circle"></div>
     <div class="text-container"></div>
-    <script src="script.js"></script>
+    <script>
+        const textArray = [
+            "Hello World",
+            "Welcome to the Circle",
+            "Enjoy the Colors",
+            "Click Again",
+            "Last Message"
+        ];
+
+        let currentIndex = 0;
+
+        document.querySelector('.circle').addEventListener('click', () => {
+            const textContainer = document.querySelector('.text-container');
+            textContainer.textContent = textArray[currentIndex];
+            currentIndex = (currentIndex + 1) % textArray.length;
+        });
+    </script>
 </body>
 </html>
