@@ -60,27 +60,25 @@
 
         .text-container {
             position: absolute;
-            color: rgba(170, 170, 170, 0.3); /* More transparent grey */
+            color: rgba(200, 200, 200, 0.5); /* Lighter grey with more transparency */
             font-size: 2em;
             font-family: 'Impact', 'Arial Black', sans-serif;
             text-align: center;
             width: auto;
             pointer-events: none;
             opacity: 0;
-            animation: textGlitch 1s ease-in-out;
+            animation: textFlash 2s ease-in-out;
         }
 
-        @keyframes textGlitch {
-            0%, 100% {
+        @keyframes textFlash {
+            0% {
                 opacity: 0;
             }
-            10%, 30%, 50%, 70%, 90% {
+            10%, 90% {
                 opacity: 1;
-                transform: translate(0, 0);
             }
-            20%, 40%, 60%, 80% {
-                opacity: 1;
-                transform: translate(-2px, 2px);
+            100% {
+                opacity: 0;
             }
         }
     </style>
@@ -115,7 +113,7 @@
             textContainer.textContent = textArray[currentIndex];
             textContainer.style.animation = 'none';
             void textContainer.offsetWidth; // Trigger reflow to restart animation
-            textContainer.style.animation = `textGlitch ${Math.random() * 1.5 + 0.5}s ease-in-out`;
+            textContainer.style.animation = `textFlash 2s ease-in-out`;
 
             const circleSize = 50;
             const padding = 20;
