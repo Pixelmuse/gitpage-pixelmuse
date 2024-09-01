@@ -5,14 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>You are here</title>
     <style>
-        body {
+        /* Reset margin and padding for all elements */
+        * {
             margin: 0;
-            height: 100vh;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        body {
             display: flex;
             justify-content: center;
             align-items: center;
             background-color: black;
-            overflow: hidden;
             animation: screenFlash 0.3s ease-in-out;
             position: relative;
         }
