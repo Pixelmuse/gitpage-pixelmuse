@@ -17,7 +17,7 @@ body {
     width: 100%;
     height: 100%;
     background-color: #fff;
-    animation: glitch-flash 0.5s ease-in-out forwards;
+    animation: glitch-flash 0.8s ease-in-out forwards;
     z-index: 10;
     pointer-events: none;
 }
@@ -26,21 +26,21 @@ body {
     0% {
         opacity: 1;
     }
-    10% {
+    10%, 50% {
         opacity: 0.8;
-        transform: translate(5px, -5px);
+        transform: translate(5px, -5px) skewX(10deg);
     }
-    20% {
+    20%, 60% {
         opacity: 1;
-        transform: translate(-5px, 5px);
+        transform: translate(-5px, 5px) skewX(-10deg);
     }
-    30% {
+    30%, 70% {
         opacity: 0.7;
-        transform: translate(5px, 5px);
+        transform: translate(5px, 5px) skewX(5deg);
     }
-    40% {
+    40%, 80% {
         opacity: 1;
-        transform: translate(-5px, -5px);
+        transform: translate(-5px, -5px) skewX(-5deg);
     }
     100% {
         opacity: 0;
@@ -70,13 +70,15 @@ body {
 
 #message {
     position: absolute;
-    color: rgba(255, 255, 255, 0.9); /* Stronger opacity for crisper text */
-    font-size: 4rem; /* Large font size for bold effect */
-    font-weight: 900; /* Maximum boldness */
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 4rem;
+    font-weight: 900;
     letter-spacing: 2px;
+    font-family: 'Impact', 'Arial Black', sans-serif; /* BlibVert-inspired font */
+    text-transform: uppercase; /* All caps */
     opacity: 0;
     transition: opacity 0.1s ease;
     z-index: 15;
     pointer-events: none;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Sharper, less blurry shadow */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
