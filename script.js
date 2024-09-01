@@ -24,7 +24,27 @@ const messages = [
 
 let messageIndex = 0;
 
+// Function to generate random position avoiding the orb area
+function getRandomPosition() {
+    const orbRect = orb.getBoundingClientRect();
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+    
+    let x, y;
+    do {
+        x = Math.random() * (windowWidth - 200); // Consider message width as 200px
+        y = Math.random() * (windowHeight - 50); // Consider message height as 50px
+    } while (x > orbRect.left - 200 && x < orbRect.right + 200 && 
+             y > orbRect.top - 50 && y < orbRect.bottom + 50);
+
+    return { x, y };
+}
+
 orb.addEventListener('click', () => {
+    const { x, y } = getRandomPosition();
+    messageElement.style.left = `${x}px`;
+    messageElement.style.top = `${y}px`;
+
     showMessage(messages[messageIndex]);
     messageIndex = (messageIndex + 1) % messages.length;
 });
@@ -32,8 +52,13 @@ orb.addEventListener('click', () => {
 function showMessage(message) {
     messageElement.textContent = message;
     messageElement.style.opacity = 1;
-    
+
     setTimeout(() => {
         messageElement.style.opacity = 0;
-    }, 1500); // Display message for 1.5 seconds
+    }, 500); // Display message for 0.5 seconds
 }
+
+// Remove flash effect after it runs once
+setTimeout(() => {
+    document.getElementById('flash').remove();
+}, 200);
