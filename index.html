@@ -60,36 +60,27 @@
 
         .text-container {
             position: absolute;
-            color: rgba(170, 170, 170, 0.5); /* More transparent grey */
+            color: rgba(170, 170, 170, 0.3); /* More transparent grey */
             font-size: 2em;
             font-family: 'Impact', 'Arial Black', sans-serif;
             text-align: center;
             width: auto;
             pointer-events: none;
             opacity: 0;
-            animation: textFlash 2s ease-in-out;
+            animation: textGlitch 1s ease-in-out;
         }
 
-        @keyframes textFlash {
-            0% {
+        @keyframes textGlitch {
+            0%, 100% {
                 opacity: 0;
-                transform: translate(0, 0) skew(0deg, 0deg) scale(1);
             }
-            25% {
-                opacity: 0.8;
-                transform: translate(3px, -3px) skew(5deg, 5deg) scale(1.05);
-            }
-            50% {
+            10%, 30%, 50%, 70%, 90% {
                 opacity: 1;
-                transform: translate(-3px, 3px) skew(-5deg, -5deg) scale(1);
+                transform: translate(0, 0);
             }
-            75% {
-                opacity: 0.8;
-                transform: translate(3px, -3px) skew(5deg, 5deg) scale(0.95);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(0, 0) skew(0deg, 0deg) scale(1);
+            20%, 40%, 60%, 80% {
+                opacity: 1;
+                transform: translate(-2px, 2px);
             }
         }
     </style>
@@ -124,7 +115,7 @@
             textContainer.textContent = textArray[currentIndex];
             textContainer.style.animation = 'none';
             void textContainer.offsetWidth; // Trigger reflow to restart animation
-            textContainer.style.animation = `textFlash ${Math.random() * 2 + 1}s ease-in-out`;
+            textContainer.style.animation = `textGlitch ${Math.random() * 1.5 + 0.5}s ease-in-out`;
 
             const circleSize = 50;
             const padding = 20;
