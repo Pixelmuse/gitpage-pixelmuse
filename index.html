@@ -3,50 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>You are here</title>
+    <title>Pulsing Circle with Sequential Text</title>
     <style>
-        /* Reset margin and padding for all elements */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html, body {
-            height: 100%;
-            overflow: hidden; /* Prevent scrolling */
-        }
-
         body {
+            margin: 0;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             background-color: black;
-            animation: screenFlash 0.3s ease-in-out;
-            position: relative;
-        }
-
-        @keyframes screenFlash {
-            0% {
-                background-color: white;
-            }
-            100% {
-                background-color: black;
-            }
+            color: #949494;
+            font-family: 'Impact', 'Arial Black', Helvetica, sans-serif;
         }
 
         .circle {
-            width: 50px;
-            height: 50px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
             background-size: 400%;
-            animation: pulse 2s infinite, rainbow 15s infinite alternate;
+            animation: pulse 2s infinite, rainbow 5s infinite alternate;
             cursor: pointer;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
         }
 
         @keyframes pulse {
@@ -69,32 +46,23 @@
 
         .text-container {
             position: absolute;
-            color: rgba(255, 255, 255, 0.5); /* Lighter grey with more transparency */
-            font-size: 2em;
-            font-family: 'Impact', 'Arial Black', sans-serif;
+            top: 70%;
+            width: 100%;
             text-align: center;
-            width: auto;
-            pointer-events: none;
-            opacity: 0;
-            animation: textFlash 0.1s ease-in-out;
+            font-size: 2em;
+            font-weight: bold;
+            color: darkgrey;
+            transition: opacity 0.5s ease-in-out;
         }
 
-        @keyframes textFlash {
-            0% {
-                opacity: 0;
-            }
-            10%, 90% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-            }
+        .hidden {
+            opacity: 0;
         }
     </style>
 </head>
 <body>
     <div class="circle"></div>
-    <div class="text-container"></div>
+    <div class="text-container hidden"></div>
     <script>
         const textArray = [
             "if ( 1 + 1 == 1 ){ e8z = true; }",  // Keeping the first line as requested
@@ -113,51 +81,25 @@
             "This is just the beginning.",
             "Where is the answer?",
             "They are close.",
-            "This too will change.",
-            "Return again."
+            "This too will change."
         ];
 
         let currentIndex = 0;
 
         document.querySelector('.circle').addEventListener('click', () => {
             const textContainer = document.querySelector('.text-container');
-            textContainer.textContent = textArray[currentIndex];
-            textContainer.style.animation = 'none';
-            void textContainer.offsetWidth; // Trigger reflow to restart animation
-            textContainer.style.animation = `textFlash 2s ease-in-out`;
+            textContainer.classList.add('hidden');
 
-            const circleSize = 50;
-            const padding = 20;
-
-            // Randomize text position within the viewport, avoiding the circle
-            const randomX = Math.random() * (window.innerWidth - textContainer.clientWidth - 2 * padding) + padding;
-            const randomY = Math.random() * (window.innerHeight - textContainer.clientHeight - 2 * padding) + padding;
-
-            const circleX = window.innerWidth / 2 - circleSize / 2;
-            const circleY = window.innerHeight / 2 - circleSize / 2;
-
-            const overlapX = randomX + textContainer.clientWidth > circleX - padding && randomX < circleX + circleSize + padding;
-            const overlapY = randomY + textContainer.clientHeight > circleY - padding && randomY < circleY + circleSize + padding;
-
-            if (overlapX && overlapY) {
-                if (randomX > circleX) {
-                    textContainer.style.left = `${randomX + circleSize + padding}px`;
-                } else {
-                    textContainer.style.left = `${randomX - circleSize - padding}px`;
-                }
-
-                if (randomY > circleY) {
-                    textContainer.style.top = `${randomY + circleSize + padding}px`;
-                } else {
-                    textContainer.style.top = `${randomY - circleSize - padding}px`;
-                }
-            } else {
-                textContainer.style.left = `${randomX}px`;
-                textContainer.style.top = `${randomY}px`;
-            }
-
-            currentIndex = (currentIndex + 1) % textArray.length;
+            setTimeout(() => {
+                textContainer.textContent = textArray[currentIndex];
+                textContainer.classList.remove('hidden');
+                currentIndex = (currentIndex + 1) % textArray.length;
+            }, rand(500, 1500)); // Random delay between 0.5s and 1.5s
         });
+
+        function rand(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
     </script>
 </body>
 </html>
