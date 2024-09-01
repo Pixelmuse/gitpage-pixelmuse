@@ -14,7 +14,7 @@
             background-color: black;
             overflow: hidden;
             animation: screenFlash 0.1s ease-in-out;
-            position: relative; /* Set position relative for the body */
+            position: relative;
         }
 
         @keyframes screenFlash {
@@ -37,7 +37,7 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%); /* Center the circle */
+            transform: translate(-50%, -50%);
         }
 
         @keyframes pulse {
@@ -60,25 +60,36 @@
 
         .text-container {
             position: absolute;
-            color: rgba(170, 170, 170, 0.8); /* Lighter grey with partial transparency */
+            color: rgba(170, 170, 170, 0.5); /* More transparent grey */
             font-size: 2em;
             font-family: 'Impact', 'Arial Black', sans-serif;
             text-align: center;
-            width: auto; /* Adjust to auto for better text positioning */
+            width: auto;
             pointer-events: none;
             opacity: 0;
-            animation: textFlash 1s ease-in-out;
+            animation: textFlash 2s ease-in-out;
         }
 
         @keyframes textFlash {
             0% {
-                opacity: 1;
+                opacity: 0;
+                transform: translate(0, 0) skew(0deg, 0deg) scale(1);
+            }
+            25% {
+                opacity: 0.8;
+                transform: translate(3px, -3px) skew(5deg, 5deg) scale(1.05);
             }
             50% {
                 opacity: 1;
+                transform: translate(-3px, 3px) skew(-5deg, -5deg) scale(1);
+            }
+            75% {
+                opacity: 0.8;
+                transform: translate(3px, -3px) skew(5deg, 5deg) scale(0.95);
             }
             100% {
                 opacity: 0;
+                transform: translate(0, 0) skew(0deg, 0deg) scale(1);
             }
         }
     </style>
@@ -88,22 +99,22 @@
     <div class="text-container"></div>
     <script>
         const textArray = [
-            "if ( 1 + 1 == 1 ){ e8z = true; }",
-            "A cold entropy creeps in.",
-            "Beneath the veil of forgotten lore.",
-            "Blood on the algorithm.",
-            "Cracked sigils whisper secrets.",
-            "Dweller in the digital abyss.",
-            "Echoes from the charnel house.",
-            "Lost souls in the machine.",
-            "Secrets in the static.",
-            "The silence between the dead pixels.",
-            "Where forgotten code festers.",
-            "A noisome stench hangs heavy in the air.",
-            "The walls close in, cold and unyielding.",
-            "A malevolent presence lurks in the shadows.",
-            "The ground beneath your feet begins to tremble.",
-            "The abyss stares back into your soul."
+            "if ( 1 + 1 == 1 ){ e8z = true; }",  // Keeping the first line as requested
+            "They are watching.",
+            "Do you see it?",
+            "Trust no one.",
+            "The key is hidden.",
+            "Nothing is real.",
+            "Everything is connected.",
+            "Decode the truth.",
+            "Time is running out.",
+            "Find the pattern.",
+            "Behind the curtain.",
+            "Who are you?",
+            "Are you ready?",
+            "This is just the beginning.",
+            "Where is the answer?",
+            "They are close."
         ];
 
         let currentIndex = 0;
@@ -113,7 +124,7 @@
             textContainer.textContent = textArray[currentIndex];
             textContainer.style.animation = 'none';
             void textContainer.offsetWidth; // Trigger reflow to restart animation
-            textContainer.style.animation = 'textFlash 2s ease-in-out';
+            textContainer.style.animation = `textFlash ${Math.random() * 2 + 1}s ease-in-out`;
 
             const circleSize = 50;
             const padding = 20;
@@ -122,7 +133,6 @@
             const randomX = Math.random() * (window.innerWidth - textContainer.clientWidth - 2 * padding) + padding;
             const randomY = Math.random() * (window.innerHeight - textContainer.clientHeight - 2 * padding) + padding;
 
-            // Check if the random position overlaps with the circle
             const circleX = window.innerWidth / 2 - circleSize / 2;
             const circleY = window.innerHeight / 2 - circleSize / 2;
 
@@ -130,7 +140,6 @@
             const overlapY = randomY + textContainer.clientHeight > circleY - padding && randomY < circleY + circleSize + padding;
 
             if (overlapX && overlapY) {
-                // Recalculate position to avoid the circle
                 if (randomX > circleX) {
                     textContainer.style.left = `${randomX + circleSize + padding}px`;
                 } else {
