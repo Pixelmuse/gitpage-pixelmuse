@@ -1,25 +1,11 @@
 const orb = document.getElementById('orb');
 const messageElement = document.getElementById('message');
 
-const messages = [
-    "if ( 1 + 1 == 1 ){ e8z = true; }",
-    "They are watching.",
-    "Do you see it?",
-    "Trust no one.",
-    "The key is hidden.",
-    "Nothing is real.",
-    "Everything is connected.",
-    "Decode the truth.",
-    "Time is running out.",
-    "Find the pattern.",
-    "Behind the curtain.",
-    "Who are you?",
-    "Are you ready?",
-    "This is just the beginning.",
-    "Where is the answer?",
-    "They are close.",
-    "This too will change.",
-    "Return again."
+const blibVerts = [
+    "SEX", "SATAN", "MONEY", "ADS", "INTERFACE", "ACCESS", "ENTRANCE", 
+    "ANSWERS", "PLACE", "NO ART", "WISDOM", "CHANCE", "MAINTENANCE", 
+    "SHIT", "PROMISES", "COMMITMENT", "OPTIONS", "HYPE", "PRODUCT", 
+    "RECEIPT", "LIFE", "WAY", "CLUE", "HOPE", "CONTROL"
 ];
 
 let messageIndex = 0;
@@ -29,11 +15,11 @@ function getRandomPosition() {
     const orbRect = orb.getBoundingClientRect();
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
-    
+
     let x, y;
     do {
-        x = Math.random() * (windowWidth - 200); // Consider message width as 200px
-        y = Math.random() * (windowHeight - 100); // Consider message height as 100px
+        x = Math.random() * (windowWidth - 200); // Message width ~200px
+        y = Math.random() * (windowHeight - 100); // Message height ~100px
     } while (x > orbRect.left - 200 && x < orbRect.right + 200 && 
              y > orbRect.top - 100 && y < orbRect.bottom + 100);
 
@@ -45,8 +31,8 @@ orb.addEventListener('click', () => {
     messageElement.style.left = `${x}px`;
     messageElement.style.top = `${y}px`;
 
-    showMessage(messages[messageIndex]);
-    messageIndex = (messageIndex + 1) % messages.length;
+    showMessage(blibVerts[messageIndex]);
+    messageIndex = (messageIndex + 1) % blibVerts.length;
 });
 
 function showMessage(message) {
@@ -61,4 +47,4 @@ function showMessage(message) {
 // Remove flash effect after it runs once
 setTimeout(() => {
     document.getElementById('flash').remove();
-}, 500);
+}, 800);
