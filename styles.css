@@ -1,21 +1,22 @@
 body {
     margin: 0;
+    padding: 0;
+    background-color: #000;
     height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    background-color: black;
+    justify-content: center;
     overflow: hidden;
+    font-family: 'Courier New', Courier, monospace;
 }
 
-.circle {
-    width: 150px;
-    height: 150px;
+#orb {
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
     border-radius: 50%;
-    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-    background-size: 400%;
-    animation: pulse 2s infinite, rainbow 5s infinite alternate;
-    cursor: pointer;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
@@ -23,28 +24,19 @@ body {
         transform: scale(1);
     }
     50% {
-        transform: scale(1.1);
+        transform: scale(1.2);
+        box-shadow: 0 0 30px rgba(255, 255, 255, 1);
     }
 }
 
-@keyframes rainbow {
-    0% {
-        background-position: 0% 50%;
-    }
-    100% {
-        background-position: 100% 50%;
-    }
-}
-
-.text-container {
+#message {
     position: absolute;
-    color: darkgrey;
-    font-size: 2em;
-    font-weight: bold;
-    text-align: center;
-    width: 100%;
-    top: 80%;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
-    pointer-events: none;
+    transform: translate(-50%, -50%);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 2rem;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
 }
