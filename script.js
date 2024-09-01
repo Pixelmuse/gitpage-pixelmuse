@@ -33,9 +33,9 @@ function getRandomPosition() {
     let x, y;
     do {
         x = Math.random() * (windowWidth - 200); // Consider message width as 200px
-        y = Math.random() * (windowHeight - 50); // Consider message height as 50px
+        y = Math.random() * (windowHeight - 100); // Consider message height as 100px
     } while (x > orbRect.left - 200 && x < orbRect.right + 200 && 
-             y > orbRect.top - 50 && y < orbRect.bottom + 50);
+             y > orbRect.top - 100 && y < orbRect.bottom + 100);
 
     return { x, y };
 }
@@ -55,10 +55,10 @@ function showMessage(message) {
 
     setTimeout(() => {
         messageElement.style.opacity = 0;
-    }, 500); // Display message for 0.5 seconds
+    }, 300); // Display message for 0.3 seconds (quick flash)
 }
 
 // Remove flash effect after it runs once
 setTimeout(() => {
     document.getElementById('flash').remove();
-}, 200);
+}, 500);
