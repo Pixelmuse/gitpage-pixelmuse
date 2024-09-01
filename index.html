@@ -67,7 +67,7 @@
             width: auto; /* Adjust to auto for better text positioning */
             pointer-events: none;
             opacity: 0;
-            animation: textFlash 2s ease-in-out;
+            animation: textFlash 1s ease-in-out;
         }
 
         @keyframes textFlash {
@@ -129,10 +129,19 @@
             const overlapX = randomX + textContainer.clientWidth > circleX - padding && randomX < circleX + circleSize + padding;
             const overlapY = randomY + textContainer.clientHeight > circleY - padding && randomY < circleY + circleSize + padding;
 
-            // Adjust position if overlapping
             if (overlapX && overlapY) {
-                textContainer.style.left = `${(randomX > circleX ? randomX + circleSize : randomX - circleSize)}px`;
-                textContainer.style.top = `${(randomY > circleY ? randomY + circleSize : randomY - circleSize)}px`;
+                // Recalculate position to avoid the circle
+                if (randomX > circleX) {
+                    textContainer.style.left = `${randomX + circleSize + padding}px`;
+                } else {
+                    textContainer.style.left = `${randomX - circleSize - padding}px`;
+                }
+
+                if (randomY > circleY) {
+                    textContainer.style.top = `${randomY + circleSize + padding}px`;
+                } else {
+                    textContainer.style.top = `${randomY - circleSize - padding}px`;
+                }
             } else {
                 textContainer.style.left = `${randomX}px`;
                 textContainer.style.top = `${randomY}px`;
