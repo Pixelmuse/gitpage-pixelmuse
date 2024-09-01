@@ -14,6 +14,7 @@
             background-color: black;
             overflow: hidden;
             animation: screenFlash 0.1s ease-in-out;
+            position: relative; /* Set position relative for the body */
         }
 
         @keyframes screenFlash {
@@ -33,6 +34,10 @@
             background-size: 400%;
             animation: pulse 2s infinite, rainbow 5s infinite alternate;
             cursor: pointer;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Center the circle */
         }
 
         @keyframes pulse {
@@ -55,13 +60,13 @@
 
         .text-container {
             position: absolute;
-            color: #666666; /* Corrected dark grey color */
+            color: rgba(170, 170, 170, 0.8); /* Lighter grey with partial transparency */
             font-size: 2em;
-            font-family: 'Impact', 'Arial Black', sans-serif; /* Bold, thick font */
+            font-family: 'Impact', 'Arial Black', sans-serif;
             text-align: center;
-            width: 100%;
+            width: auto; /* Adjust to auto for better text positioning */
             pointer-events: none;
-            opacity: 0; /* Start invisible */
+            opacity: 0;
             animation: textFlash 2s ease-in-out;
         }
 
@@ -83,7 +88,7 @@
     <div class="text-container"></div>
     <script>
         const textArray = [
-            "if ( 1 + 1 == 1 ){ e8z = true; }",  // Include the initial code snippet
+            "if ( 1 + 1 == 1 ){ e8z = true; }",
             "A cold entropy creeps in.",
             "Beneath the veil of forgotten lore.",
             "Blood on the algorithm.",
@@ -106,15 +111,32 @@
         document.querySelector('.circle').addEventListener('click', () => {
             const textContainer = document.querySelector('.text-container');
             textContainer.textContent = textArray[currentIndex];
-            textContainer.style.animation = 'none'; // Reset animation
+            textContainer.style.animation = 'none';
             void textContainer.offsetWidth; // Trigger reflow to restart animation
             textContainer.style.animation = 'textFlash 2s ease-in-out';
 
-            // Randomize text position within the viewport
-            const randomX = Math.random() * (window.innerWidth - textContainer.clientWidth);
-            const randomY = Math.random() * (window.innerHeight - textContainer.clientHeight);
-            textContainer.style.left = `${randomX}px`;
-            textContainer.style.top = `${randomY}px`;
+            const circleSize = 50;
+            const padding = 20;
+
+            // Randomize text position within the viewport, avoiding the circle
+            const randomX = Math.random() * (window.innerWidth - textContainer.clientWidth - 2 * padding) + padding;
+            const randomY = Math.random() * (window.innerHeight - textContainer.clientHeight - 2 * padding) + padding;
+
+            // Check if the random position overlaps with the circle
+            const circleX = window.innerWidth / 2 - circleSize / 2;
+            const circleY = window.innerHeight / 2 - circleSize / 2;
+
+            const overlapX = randomX + textContainer.clientWidth > circleX - padding && randomX < circleX + circleSize + padding;
+            const overlapY = randomY + textContainer.clientHeight > circleY - padding && randomY < circleY + circleSize + padding;
+
+            // Adjust position if overlapping
+            if (overlapX && overlapY) {
+                textContainer.style.left = `${(randomX > circleX ? randomX + circleSize : randomX - circleSize)}px`;
+                textContainer.style.top = `${(randomY > circleY ? randomY + circleSize : randomY - circleSize)}px`;
+            } else {
+                textContainer.style.left = `${randomX}px`;
+                textContainer.style.top = `${randomY}px`;
+            }
 
             currentIndex = (currentIndex + 1) % textArray.length;
         });
