@@ -45,17 +45,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Calculate random position for the message, avoiding the orb's area
     function getRandomPosition() {
-        const orbRect = orb.getBoundingClientRect();
+        const orbRect = orb.getBoundingClientRect(); // Get orb dimensions and position
+        const messageWidth = 200;  // Estimated message width (adjust if needed)
+        const messageHeight = 100; // Estimated message height (adjust if needed)
         const windowWidth = window.innerWidth;
         const windowHeight = window.innerHeight;
 
         let x, y;
+
+        // Loop until we find a position that doesn't overlap with the orb
         do {
-            x = Math.random() * (windowWidth - 200); // Adjust for message width
-            y = Math.random() * (windowHeight - 100); // Adjust for message height
+            x = Math.random() * (windowWidth - messageWidth);
+            y = Math.random() * (windowHeight - messageHeight);
         } while (
-            x > orbRect.left - 200 && x < orbRect.right + 200 &&
-            y > orbRect.top - 100 && y < orbRect.bottom + 100
+            x > orbRect.left - messageWidth && x < orbRect.right + messageWidth &&
+            y > orbRect.top - messageHeight && y < orbRect.bottom + messageHeight
         );
 
         return { x, y };
