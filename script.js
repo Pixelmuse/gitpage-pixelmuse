@@ -2,10 +2,10 @@ const orb = document.getElementById('orb');
 const messageElement = document.getElementById('message');
 
 const blibVerts = [
-    "SEX", "SATAN", "MONEY", "ADS", "INTERFACE", "ACCESS", "ENTRANCE", 
-    "ANSWERS", "PLACE", "NO ART", "WISDOM", "CHANCE", "MAINTENANCE", 
+    "SORROW", "LIES", "MONEY", "ADS", "INTERFACE", "ACCESS", "ENTRANCE", 
+    "ANSWERS", "PLACE", "THINK", "WISDOM", "CHANCE", "ILLUSION", 
     "SHIT", "PROMISES", "COMMITMENT", "OPTIONS", "HYPE", "PRODUCT", 
-    "RECEIPT", "LIFE", "WAY", "CLUE", "HOPE", "CONTROL"
+    "RECEIPT", "LIFE", "FREEDOM", "CLUE", "HOPE", "CONTROL"
 ];
 
 let messageIndex = 0;
