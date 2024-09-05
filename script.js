@@ -24,36 +24,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const orb = document.getElementById('orb');
     let messageIndex = 0;
 
-    // Display random message on orb click
     orb.addEventListener('click', () => {
         messageElement.textContent = messages[messageIndex];
         messageElement.style.opacity = 1;
 
-        // Position the message at random, avoiding overlap with the orb
         const { x, y } = getRandomPosition();
         messageElement.style.left = `${x}px`;
         messageElement.style.top = `${y}px`;
 
-        // Hide the message after a short duration
+        // Flash the message on screen briefly (no fading)
         setTimeout(() => {
             messageElement.style.opacity = 0;
-        }, 300); // Message visible for 0.3 seconds
+        }, 200); // Display message for 0.2 seconds (fast flash)
 
-        // Update message index
+        // Cycle to the next message
         messageIndex = (messageIndex + 1) % messages.length;
     });
 
-    // Calculate random position for the message, avoiding the orb's area
     function getRandomPosition() {
-        const orbRect = orb.getBoundingClientRect(); // Get orb dimensions and position
-        const messageWidth = 200;  // Estimated message width (adjust if needed)
-        const messageHeight = 100; // Estimated message height (adjust if needed)
+        const orbRect = orb.getBoundingClientRect();
+        const messageWidth = messageElement.offsetWidth || 200; // Measure or estimate message width
+        const messageHeight = messageElement.offsetHeight || 100; // Measure or estimate message height
         const windowWidth = window.innerWidth;
         const windowHeight = window.innerHeight;
 
         let x, y;
 
-        // Loop until we find a position that doesn't overlap with the orb
         do {
             x = Math.random() * (windowWidth - messageWidth);
             y = Math.random() * (windowHeight - messageHeight);
@@ -62,12 +58,15 @@ document.addEventListener('DOMContentLoaded', () => {
             y > orbRect.top - messageHeight && y < orbRect.bottom + messageHeight
         );
 
+        // Ensure text does not go beyond screen edges
+        x = Math.min(Math.max(0, x), windowWidth - messageWidth);
+        y = Math.min(Math.max(0, y), windowHeight - messageHeight);
+
         return { x, y };
     }
 
-    // Remove the flash effect after it runs once
     setTimeout(() => {
         const flash = document.getElementById('flash');
         if (flash) flash.remove();
-    }, 500); // Matches the flash animation duration
+    }, 500);
 });
