@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Flash the message on screen briefly (no fading)
         setTimeout(() => {
             messageElement.style.opacity = 0;
-        }, 500); // Display message for 0.2 seconds (fast flash)
+        }, 1500); // Display message for 0.2 seconds (fast flash)
 
         // Cycle to the next message
         messageIndex = (messageIndex + 1) % messages.length;
