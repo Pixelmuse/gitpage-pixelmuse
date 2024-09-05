@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Apply the random position
         glitchText.style.left = `${randomX}px`;
         glitchText.style.top = `${randomY}px`;
+        glitchText.style.transform = 'translate(0, 0)';  // Remove the initial centering transform
     }
 
     // Event listener for clicking the text
