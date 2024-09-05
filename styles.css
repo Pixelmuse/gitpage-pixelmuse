@@ -21,62 +21,73 @@ body {
   color: #fff;
   text-transform: uppercase;
   display: inline-block;
-  animation: glitch-animation 2s infinite;
+  animation: glitch-anim 2s infinite;
+  line-height: 1;
 }
 
-.glitch::before,
-.glitch::after {
+.glitch::before, .glitch::after {
   content: 'WHAT IS REAL?';
   position: absolute;
   left: 0;
   top: 0;
-  color: #fff;
   background: transparent;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-  animation: glitch-animation 2s infinite, clip-animation 1.5s infinite;
+  overflow: hidden;
 }
 
-/* Glitch color layers */
+/* Layer 1 (green shift) */
 .glitch::before {
-  left: 2px;
-  text-shadow: -2px 0 #4E9A26;
-  animation-delay: -0.1s;
+  color: #4E9A26;
+  animation: glitch-anim 2s infinite, clip-anim 2s infinite linear;
+  z-index: -1;
 }
 
+/* Layer 2 (red shift) */
 .glitch::after {
-  left: -2px;
-  text-shadow: 2px 0 #AC1212;
-  animation-delay: -0.2s;
+  color: #AC1212;
+  animation: glitch-anim 2s infinite, clip-anim2 1.5s infinite linear;
+  z-index: -2;
 }
 
-/* Keyframes for glitch movement */
-@keyframes glitch-animation {
+/* Keyframes for glitchy horizontal and vertical shifts */
+@keyframes glitch-anim {
   0%, 100% {
-    transform: translate(0);
+    transform: translate(0, 0);
   }
   20% {
-    transform: translate(-2px, 2px);
+    transform: translate(2px, -2px);
   }
   40% {
-    transform: translate(-2px, -2px);
+    transform: translate(-2px, 2px);
   }
   60% {
-    transform: translate(2px, 2px);
+    transform: translate(3px, -3px);
   }
   80% {
-    transform: translate(2px, -2px);
+    transform: translate(-3px, 3px);
   }
 }
 
-/* Keyframes for clipping effect */
-@keyframes clip-animation {
+/* Keyframes for random clipping (vertical slice) */
+@keyframes clip-anim {
   0% {
-    clip-path: inset(0 0 10% 0);
+    clip-path: inset(0% 0% 90% 0%);
   }
   50% {
-    clip-path: inset(50% 0 0 0);
+    clip-path: inset(40% 0% 50% 0%);
   }
   100% {
-    clip-path: inset(0 0 10% 0);
+    clip-path: inset(0% 0% 90% 0%);
+  }
+}
+
+@keyframes clip-anim2 {
+  0% {
+    clip-path: inset(0% 0% 70% 0%);
+  }
+  50% {
+    clip-path: inset(30% 0% 40% 0%);
+  }
+  100% {
+    clip-path: inset(0% 0% 70% 0%);
   }
 }
