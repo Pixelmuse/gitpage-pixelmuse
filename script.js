@@ -1,50 +1,69 @@
-const orb = document.getElementById('orb');
-const messageElement = document.getElementById('message');
+document.addEventListener('DOMContentLoaded', () => {
+    const messages = [
+        "if ( 1 + 1 == 1 ){ e8z = true; }",
+        "They are watching.",
+        "Do you see it?",
+        "Trust no one.",
+        "The key is hidden.",
+        "Nothing is real.",
+        "Everything is connected.",
+        "Decode the truth.",
+        "Time is running out.",
+        "Find the pattern.",
+        "Behind the curtain.",
+        "Who are you?",
+        "Are you ready?",
+        "This is just the beginning.",
+        "Where is the answer?",
+        "They are close.",
+        "This too will change.",
+        "Return again."
+    ];
 
-const blibVerts = [
-    "SORROW", "LIES", "MONEY", "ADS", "INTERFACE", "ACCESS", "ENTRANCE", 
-    "ANSWERS", "PLACE", "THINK", "WISDOM", "CHANCE", "ILLUSION", 
-    "SHIT", "PROMISES", "COMMITMENT", "OPTIONS", "HYPE", "PRODUCT", 
-    "RECEIPT", "LIFE", "FREEDOM", "CLUE", "HOPE", "CONTROL"
-];
+    const messageElement = document.getElementById('message');
+    const orb = document.getElementById('orb');
+    let messageIndex = 0;
 
-let messageIndex = 0;
+    // Display random message on orb click
+    orb.addEventListener('click', () => {
+        messageElement.textContent = messages[messageIndex];
+        messageElement.style.opacity = 1;
 
-// Function to generate random position avoiding the orb area
-function getRandomPosition() {
-    const orbRect = orb.getBoundingClientRect();
-    const windowWidth = window.innerWidth;
-    const windowHeight = window.innerHeight;
+        // Position the message at random, avoiding overlap with the orb
+        const { x, y } = getRandomPosition();
+        messageElement.style.left = `${x}px`;
+        messageElement.style.top = `${y}px`;
 
-    let x, y;
-    do {
-        x = Math.random() * (windowWidth - 200); // Message width ~200px
-        y = Math.random() * (windowHeight - 100); // Message height ~100px
-    } while (x > orbRect.left - 200 && x < orbRect.right + 200 && 
-             y > orbRect.top - 100 && y < orbRect.bottom + 100);
+        // Hide the message after a short duration
+        setTimeout(() => {
+            messageElement.style.opacity = 0;
+        }, 300); // Message visible for 0.3 seconds
 
-    return { x, y };
-}
+        // Update message index
+        messageIndex = (messageIndex + 1) % messages.length;
+    });
 
-orb.addEventListener('click', () => {
-    const { x, y } = getRandomPosition();
-    messageElement.style.left = `${x}px`;
-    messageElement.style.top = `${y}px`;
+    // Calculate random position for the message, avoiding the orb's area
+    function getRandomPosition() {
+        const orbRect = orb.getBoundingClientRect();
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
 
-    showMessage(blibVerts[messageIndex]);
-    messageIndex = (messageIndex + 1) % blibVerts.length;
-});
+        let x, y;
+        do {
+            x = Math.random() * (windowWidth - 200); // Adjust for message width
+            y = Math.random() * (windowHeight - 100); // Adjust for message height
+        } while (
+            x > orbRect.left - 200 && x < orbRect.right + 200 &&
+            y > orbRect.top - 100 && y < orbRect.bottom + 100
+        );
 
-function showMessage(message) {
-    messageElement.textContent = message;
-    messageElement.style.opacity = 1;
+        return { x, y };
+    }
 
+    // Remove the flash effect after it runs once
     setTimeout(() => {
-        messageElement.style.opacity = 0;
-    }, 300); // Display message for 0.3 seconds (quick flash)
-}
-
-// Remove flash effect after it runs once
-setTimeout(() => {
-    document.getElementById('flash').remove();
-}, 800);
+        const flash = document.getElementById('flash');
+        if (flash) flash.remove();
+    }, 500); // Matches the flash animation duration
+});
