@@ -1,4 +1,4 @@
-/* Basic reset */
+/* Reset */
 * {
     margin: 0;
     padding: 0;
@@ -9,33 +9,32 @@ html, body {
     height: 100%;
     background-color: black;
     font-family: 'Courier New', Courier, monospace;
+    overflow: hidden; /* Prevent scrolling */
+}
+
+/* Glitch container */
+#glitch-container {
+    position: relative;
+    width: 100%;  /* Fullscreen width */
+    height: 100%; /* Fullscreen height */
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;  /* Prevent scrolling */
 }
 
-#glitch-container {
-    position: relative;
-    width: 100%;         /* Full width */
-    height: 100%;        /* Full height */
-    display: flex;       /* Flex to center contents */
-    justify-content: center;
-    align-items: center;
-    border: 1px solid red;  /* Debug border for visibility */
-}
-
+/* Glitch text */
 .glitch-text {
     color: white;
     font-family: 'Arial Black', sans-serif;
-    font-weight: 800;
-    font-size: 50px; 
+    font-size: 50px;
+    white-space: nowrap;  /* Prevent text from breaking into multiple lines */
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center text horizontally and vertically */
     background-color: rgba(0, 0, 0, 0.75); /* Background to avoid blending */
     padding: 10px;
     text-align: center;
-    z-index: 1;    /* Ensure it’s on top */
-    border: 1px solid yellow;  /* Debug border for visibility */
 }
 
 /* Glitch animation */
