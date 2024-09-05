@@ -61,26 +61,13 @@ html, body {
 /* Message styling */
 .message {
     position: absolute;
-    color: #FAFFFC;
+    color: rgba(255, 255, 255, 0.5); /* Make text more transparent */
     opacity: 0;
     font-size: 3vw; /* Adjusted for desktop */
     font-weight: 900;
     text-transform: uppercase;
-    transition: opacity 0.3s ease;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
     z-index: 15;
     pointer-events: none;
-    animation: glitch 1s infinite;
-}
-
-/* Glitchy text effect */
-@keyframes glitch {
-    0% { text-shadow: 2px 2px red; }
-    20% { text-shadow: -2px -2px blue; }
-    40% { text-shadow: 2px -2px red; }
-    60% { text-shadow: -2px 2px blue; }
-    80% { text-shadow: 2px 2px red; }
-    100% { text-shadow: -2px -2px blue; }
 }
 
 /* Media Queries for Mobile Devices */
@@ -95,24 +82,4 @@ html, body {
     }
 }
 
-@media (max-width: 768px) {
-    #orb {
-        width: 12vw;
-        height: 12vw;
-    }
-
-    .message {
-        font-size: 5vw;
-    }
-}
-
-@media (max-width: 480px) {
-    #orb {
-        width: 18vw;
-        height: 18vw;
-    }
-
-    .message {
-        font-size: 7vw;
-    }
-}
+@media (max
