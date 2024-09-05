@@ -28,6 +28,9 @@ html, body {
     font-weight: 800;
     font-size: 50px; /* Fixed font size */
     position: absolute;
+    top: 50%;   /* Start in the center */
+    left: 50%;  /* Start in the center */
+    transform: translate(-50%, -50%); /* Align text to the center */
     background-color: rgba(0, 0, 0, 0.75); /* Background to avoid blending */
     padding: 10px;
     text-align: center;
