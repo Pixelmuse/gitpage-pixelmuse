@@ -8,7 +8,7 @@
 html, body {
     height: 100%;
     background-color: #000;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Arial Black', 'Impact', 'Helvetica', sans-serif;
     overflow: hidden;
 }
 
@@ -35,8 +35,8 @@ html, body {
 
 /* Responsive orb in the center */
 #orb {
-    width: 10vw;
-    height: 10vw;
+    width: 7vw;
+    height: 7vw;
     background-color: #fff;
     border-radius: 50%;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
@@ -63,7 +63,7 @@ html, body {
     position: absolute;
     color: #FAFFFC;
     opacity: 0;
-    font-size: 5vw; /* Responsive text size */
+    font-size: 3vw; /* Adjusted for desktop */
     font-weight: 900;
     text-transform: uppercase;
     transition: opacity 0.3s ease;
@@ -84,24 +84,35 @@ html, body {
 }
 
 /* Media Queries for Mobile Devices */
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
     #orb {
-        width: 15vw;
-        height: 15vw;
+        width: 10vw;
+        height: 10vw;
     }
 
     .message {
-        font-size: 7vw;
+        font-size: 4vw;
+    }
+}
+
+@media (max-width: 768px) {
+    #orb {
+        width: 12vw;
+        height: 12vw;
+    }
+
+    .message {
+        font-size: 5vw;
     }
 }
 
 @media (max-width: 480px) {
     #orb {
-        width: 20vw;
-        height: 20vw;
+        width: 18vw;
+        height: 18vw;
     }
 
     .message {
-        font-size: 9vw;
+        font-size: 7vw;
     }
 }
