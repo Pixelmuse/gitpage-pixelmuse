@@ -12,24 +12,25 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;  /* Prevent scrolling */
 }
 
 #glitch-container {
     position: relative;
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 /* Glitch effect 1 */
 .glitch-effect-1 {
     color: white;
-    font-family: sans-serif;
+    font-family: 'Arial Black', sans-serif; /* Ensure bold, consistent font */
     font-weight: 800;
-    font-size: 50px;
+    font-size: 50px; /* Fixed font size */
     position: absolute;
+    background-color: rgba(0, 0, 0, 0.75); /* Background to avoid blending */
+    padding: 10px;
+    text-align: center;
 }
 
 .glitch-effect-1::before, .glitch-effect-1::after {
