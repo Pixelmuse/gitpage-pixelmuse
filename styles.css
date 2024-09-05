@@ -61,7 +61,7 @@ html, body {
 /* Message styling */
 .message {
     position: absolute;
-    color: rgba(255, 255, 255, 0.5); /* Make text more transparent */
+    color: rgba(255, 255, 255, 0.3); /* Make text more transparent */
     opacity: 0;
     font-size: 3vw; /* Adjusted for desktop */
     font-weight: 900;
