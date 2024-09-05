@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     const glitchText = document.getElementById('glitch-text');
-    const effects = ['glitch-effect-1'];  // Single glitch effect for now
-    let currentEffectIndex = 0;
 
     // Function to randomize the position of the text within the viewport
     function randomizePosition() {
@@ -22,6 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event listener for clicking the text
     glitchText.addEventListener('click', () => {
-        randomizePosition(); // Move text randomly
+        randomizePosition(); // Move text randomly after each click
     });
 });
