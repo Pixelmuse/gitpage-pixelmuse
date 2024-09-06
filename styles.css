@@ -1,93 +1,129 @@
 body {
-  background: repeating-linear-gradient(
-    0deg,
-    #0E0D0E 25%,
-    #0E0D0E 50%,
-    #171819 50%,
-    #171819 75%
-  );
-  background-size: 10px 10px;
+  background: #0E0D0E;
   height: 100vh;
-  overflow: hidden;
   display: flex;
-  font-family: 'Barlow', sans-serif;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 .glitch {
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 600;
+  color: white;
+  font-size: 100px;
   position: relative;
-  font-size: 80px;
-  color: #fff;
-  text-transform: uppercase;
-  display: inline-block;
-  animation: glitch-anim 2s infinite;
-  line-height: 1;
+  margin: 0 auto;
+  text-shadow: 
+    0px -5px 10px rgba(255, 255, 255, 1),
+    0px 0px 5px rgba(255, 255, 255, 0),
+    0px 0px 10px rgba(255, 255, 255, 0),
+    0px 0px 15px rgba(255, 255, 255, 0),
+    0px 0px 20px rgba(255, 255, 255, 0);
+  animation: noise-anim-2 3s infinite linear alternate-reverse, shift 4s ease-in-out infinite alternate, blur 8s ease-in-out infinite alternate;
+  transform: skewX(0deg);
 }
 
-.glitch::before, .glitch::after {
+/* Blur Animation */
+@keyframes blur {
+  0%, 40%, 50%, 60%, 90%, 95%, 100% {
+    text-shadow:
+      0px -5px 10px rgba(255, 255, 255, 1),
+      0px 0px 5px rgba(255, 255, 255, 0),
+      0px 0px 10px rgba(255, 255, 255, 0),
+      2px 1px 15px rgba(100, 240, 255, 0),
+      0px 0px 20px rgba(255, 255, 255, 0);
+  }
+  45%, 75% {
+    text-shadow:
+      0px -5px 10px rgba(255, 255, 255, 1),
+      0px 0px 5px rgba(255, 255, 255, 1),
+      0px 0px 10px rgba(255, 255, 255, 1),
+      2px 1px 15px rgba(100, 240, 255, 1),
+      0px 0px 20px rgba(255, 255, 255, 1);
+  }
+  97.5% {
+    text-shadow:
+      0px -5px 10px rgba(255, 255, 255, 0),
+      0px 0px 5px rgba(255, 255, 255, 0),
+      0px 0px 10px rgba(255, 255, 255, 0),
+      2px 1px 4px rgba(255, 100, 100, 1),
+      0px 0px 20px rgba(255, 255, 255, 0);
+  }
+}
+
+/* Glitch Pseudo-Elements */
+.glitch::after,
+.glitch::before {
   content: 'WHAT IS REAL?';
   position: absolute;
-  left: 0;
   top: 0;
+  left: 0;
   background: transparent;
+  color: transparent;
   overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+  animation: noise-anim-2 3s infinite linear alternate-reverse, shift 4s ease-in-out infinite alternate;
+  opacity: 0.8;
 }
 
-/* Layer 1 (green shift) */
 .glitch::before {
-  color: #4E9A26;
-  animation: glitch-anim 2s infinite, clip-anim 2s infinite linear;
+  left: 1px;
+  text-shadow: -3px 0 cyan;
   z-index: -1;
 }
 
-/* Layer 2 (red shift) */
 .glitch::after {
-  color: #AC1212;
-  animation: glitch-anim 2s infinite, clip-anim2 1.5s infinite linear;
+  left: 3px;
+  text-shadow: -1px 0 red;
   z-index: -2;
 }
 
-/* Keyframes for glitchy horizontal and vertical shifts */
-@keyframes glitch-anim {
-  0%, 100% {
-    transform: translate(0, 0);
+/* Noise Animation */
+@keyframes noise-anim-2 {
+  0% {
+    clip: rect(12px, 9999px, 54px, 0);
   }
   20% {
-    transform: translate(2px, -2px);
+    clip: rect(85px, 9999px, 40px, 0);
   }
   40% {
-    transform: translate(-2px, 2px);
+    clip: rect(15px, 9999px, 60px, 0);
   }
   60% {
-    transform: translate(3px, -3px);
+    clip: rect(95px, 9999px, 10px, 0);
   }
   80% {
-    transform: translate(-3px, 3px);
+    clip: rect(45px, 9999px, 30px, 0);
+  }
+  100% {
+    clip: rect(80px, 9999px, 55px, 0);
   }
 }
 
-/* Keyframes for random clipping (vertical slice) */
-@keyframes clip-anim {
-  0% {
-    clip-path: inset(0% 0% 90% 0%);
+/* Shift Animation */
+@keyframes shift {
+  0%, 40%, 44%, 58%, 61%, 65%, 69%, 73%, 100% {
+    transform: skewX(0deg);
   }
-  50% {
-    clip-path: inset(40% 0% 50% 0%);
+  41% {
+    transform: skewX(10deg);
   }
-  100% {
-    clip-path: inset(0% 0% 90% 0%);
+  42% {
+    transform: skewX(-10deg);
   }
-}
-
-@keyframes clip-anim2 {
-  0% {
-    clip-path: inset(0% 0% 70% 0%);
+  59% {
+    transform: skewX(40deg) skewY(10deg);
   }
-  50% {
-    clip-path: inset(30% 0% 40% 0%);
+  60% {
+    transform: skewX(-40deg) skewY(-10deg);
   }
-  100% {
-    clip-path: inset(0% 0% 70% 0%);
+  63% {
+    transform: skewX(10deg) skewY(-5deg);
+  }
+  70% {
+    transform: skewX(-50deg) skewY(-20deg);
+  }
+  71% {
+    transform: skewX(10deg) skewY(-10deg);
   }
 }
