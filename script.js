@@ -1,25 +1,38 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const glitchText = document.getElementById('glitch-text');
+const phrases = [
+    "if ( 1 + 1 == 1 ){ e8z = true; }",
+    "What is real?",
+    "Curiosity brought you here.",
+    "Do you believe in destiny?",
+    "Follow the white rabbit.",
+    "Are you awake, or just dreaming?",
+    "What is the truth?",
+    "Down the rabbit hole you go.",
+    "Reality is an illusion.",
+    "What if I told you this is not real?",
+    "You are the key.",
+    "Which path will you choose?",
+    "The choice is yours.",
+    "What are you searching for?",
+    "Everything you know is wrong.",
+    "Do you trust your senses?",
+    "Welcome to the other side.",
+    "How far will you go?",
+    "Nothing is as it seems.",
+    "This is only the beginning.",
+    "Are you the dreamer, or the dream?",
+    "Question everything.",
+    "Will you take the leap?",
+    "The rabbit hole is deeper than you think.",
+    "Are you sure you want to continue?",
+    "Don't look back now.",
+    "What do you see when you close your eyes?"
+];
 
-    // Function to randomize the position of the text within the viewport
-    function randomizePosition() {
-        const windowWidth = window.innerWidth;
-        const windowHeight = window.innerHeight;
-        const textWidth = glitchText.offsetWidth;
-        const textHeight = glitchText.offsetHeight;
+const glitchText = document.getElementById('glitch-text');
 
-        // Ensure the text stays within the visible area
-        const randomX = Math.random() * (windowWidth - textWidth);
-        const randomY = Math.random() * (windowHeight - textHeight);
-
-        // Apply the random position
-        glitchText.style.left = `${randomX}px`;
-        glitchText.style.top = `${randomY}px`;
-        glitchText.style.transform = 'translate(0, 0)';  // Remove the initial centering transform
-    }
-
-    // Event listener for clicking the text
-    glitchText.addEventListener('click', () => {
-        randomizePosition(); // Move text randomly after each click
-    });
+glitchText.addEventListener('click', () => {
+  // Randomize the text content and the data attribute
+  const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+  glitchText.textContent = randomPhrase;
+  glitchText.setAttribute('data-text', randomPhrase);
 });
