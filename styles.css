@@ -1,105 +1,121 @@
-/* Reset */
+/* General Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-html, body {
-    height: 100%;
-    background-color: black;
-    font-family: 'Courier New', Courier, monospace;
-    overflow: hidden;
+body, html {
+  height: 100%;
+  font-family: 'Georgia', serif;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
-/* Glitch container */
-#glitch-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.8), rgba(0,0,0,1)), url('https://path-to-your-smoky-bg-image.jpg');
+  background-size: cover;
+  background-position: center;
+  animation: backgroundSwirl 10s infinite ease-in-out;
 }
 
-/* Pulsing Orb */
-#orb {
-    width: 50px;
-    height: 50px;
-    background-color: white;
-    border-radius: 50%;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-    position: absolute;
-    animation: pulse 2s infinite;
-    z-index: 10;
-    cursor: pointer;
+/* Glitch Text Styling */
+.glitch-text {
+  font-size: 5rem;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  position: relative;
+  z-index: 2;
+  letter-spacing: 5px;
+  animation: textFlicker 2s ease-in-out infinite;
+  mix-blend-mode: difference;
+  filter: brightness(0.9);
 }
 
-/* Orb pulsing effect */
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.2);
-        box-shadow: 0 0 30px rgba(255, 255, 255, 1);
-    }
-}
-
-/* Glitch text, hidden initially */
-#glitch-text {
-    display: none;
-    color: white;
-    font-family: 'Arial Black', sans-serif;
-    font-size: 40px;
-    white-space: nowrap;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.75);
-    padding: 10px;
-    text-align: center;
-    z-index: 20;
-}
-
-/* Glitch effect */
+/* Glitching: Shifting Text with Transforms */
 .glitch-text::before, .glitch-text::after {
-    content: attr(title);
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.8;
+  content: "SUPERNATURAL";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+  color: #fff;
+  z-index: -1;
 }
 
 .glitch-text::before {
-    left: 2px;
-    text-shadow: -1px 0 red;
-    animation: glitch-animation-1 1.5s linear infinite;
+  left: -2px;
+  text-shadow: -2px 0 red;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim 2s infinite linear alternate-reverse;
 }
 
 .glitch-text::after {
-    left: -2px;
-    text-shadow: -1px 0 blue;
-    animation: glitch-animation-2 1.5s linear infinite;
+  left: 2px;
+  text-shadow: -2px 0 blue;
+  clip: rect(85px, 450px, 140px, 0);
+  animation: glitch-anim2 3s infinite linear alternate-reverse;
 }
 
-@keyframes glitch-animation-1 {
-    0% { clip: rect(20px, 9999px, 60px, 0); }
-    50% { clip: rect(70px, 9999px, 100px, 0); }
-    100% { clip: rect(20px, 9999px, 60px, 0); }
+/* Background swirling animation */
+@keyframes backgroundSwirl {
+  0% { background-position: 50% 50%; }
+  50% { background-position: 40% 60%; }
+  100% { background-position: 50% 50%; }
 }
 
-@keyframes glitch-animation-2 {
-    0% { clip: rect(10px, 9999px, 40px, 0); }
-    50% { clip: rect(60px, 9999px, 90px, 0); }
-    100% { clip: rect(10px, 9999px, 40px, 0); }
+/* Flicker Effect for Text */
+@keyframes textFlicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+  }
+  20%, 24%, 55% {
+    opacity: 0.6;
+  }
 }
 
-/* Responsive text for smaller devices */
-@media (max-width: 768px) {
-    .glitch-text {
-        font-size: 30px;
-    }
+/* Glitch Animations */
+@keyframes glitch-anim {
+  0% { clip: rect(44px, 450px, 56px, 0); transform: skew(0.3deg); }
+  50% { clip: rect(85px, 450px, 140px, 0); transform: skew(-0.3deg); }
+  100% { clip: rect(130px, 450px, 170px, 0); transform: translate(-10px, -5px); }
+}
+
+@keyframes glitch-anim2 {
+  0% { clip: rect(85px, 450px, 140px, 0); transform: skew(-0.2deg); }
+  50% { clip: rect(130px, 450px, 170px, 0); transform: skew(0.2deg); }
+  100% { clip: rect(44px, 450px, 56px, 0); transform: translate(10px, 5px); }
+}
+
+/* Flash Effect */
+.flash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 10;
+  animation: flash 0.1s forwards;
+}
+
+@keyframes flash {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
