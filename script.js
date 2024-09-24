@@ -4,7 +4,7 @@ window.onload = () => {
   // Trigger Glitch Randomly
   setInterval(() => {
     glitchText.classList.toggle('glitch-active');
-  }, Math.random() * (1500 - 500) + 500);
+  }, Math.random() * (800 - 300) + 300); // Faster and more frequent glitching
 
   // Flash Effect when text fully appears
   setTimeout(() => {
@@ -16,7 +16,7 @@ window.onload = () => {
     setTimeout(() => {
       flashDiv.remove();
     }, 200);
-  }, 3000); // Flash after the glitches appear
+  }, 2500); // Flash after the glitches appear
 
   // Add random horizontal line glitches
   setInterval(() => {
@@ -29,5 +29,5 @@ window.onload = () => {
     setTimeout(() => {
       line.remove();
     }, 500);
-  }, 800);
+  }, 500); // More frequent static lines
 };
