@@ -1,12 +1,5 @@
 window.onload = () => {
-  const glitchText = document.getElementById('glitchText');
-
-  // Trigger Glitch Randomly
-  setInterval(() => {
-    glitchText.classList.toggle('glitch-active');
-  }, Math.random() * (800 - 300) + 300); // Faster and more frequent glitching
-
-  // Flash Effect when text fully appears
+  // Flash Effect when the text fully appears
   setTimeout(() => {
     const flashDiv = document.createElement('div');
     flashDiv.className = 'flash';
@@ -18,16 +11,16 @@ window.onload = () => {
     }, 200);
   }, 2500); // Flash after the glitches appear
 
-  // Add random horizontal line glitches
+  // Add random horizontal glitch lines
   setInterval(() => {
     const line = document.createElement('div');
     line.className = 'glitch-line';
     line.style.top = `${Math.random() * window.innerHeight}px`;
     document.body.appendChild(line);
 
-    // Animate the line then remove it
+    // Remove the line after the animation
     setTimeout(() => {
       line.remove();
     }, 500);
-  }, 500); // More frequent static lines
+  }, 1000); // More frequent static lines
 };
