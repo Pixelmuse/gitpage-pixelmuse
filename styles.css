@@ -43,13 +43,13 @@ body, html {
 
 /* Glitch Text Styling */
 .glitch-text {
-  font-size: 5rem;
+  font-size: 6rem;
   color: #fff;
   text-transform: uppercase;
   font-weight: bold;
   position: relative;
   z-index: 2;
-  letter-spacing: 5px;
+  letter-spacing: 8px;
   animation: textFlicker 3s ease-in-out infinite, glitchEffect 2s infinite ease-in-out;
   mix-blend-mode: difference;
   filter: brightness(0.9);
@@ -69,40 +69,40 @@ body, html {
 }
 
 .glitch-text::before {
-  left: -3px;
+  left: -5px;
   text-shadow: -3px 0 red;
   clip: rect(10px, 950px, 140px, 0);
-  animation: glitch-anim 1.5s infinite alternate-reverse;
+  animation: glitch-anim 1s infinite alternate-reverse;
 }
 
 .glitch-text::after {
-  left: 3px;
+  left: 5px;
   text-shadow: -3px 0 blue;
   clip: rect(85px, 950px, 140px, 0);
-  animation: glitch-anim2 1.8s infinite alternate-reverse;
+  animation: glitch-anim2 1.3s infinite alternate-reverse;
 }
 
 /* Flicker Effect for Text */
 @keyframes textFlicker {
-  0%, 20%, 22%, 60%, 62%, 100% {
+  0%, 19%, 21%, 60%, 100% {
     opacity: 1;
   }
-  21%, 61% {
+  20%, 22%, 61% {
     opacity: 0.6;
   }
 }
 
 /* Glitch Animations */
 @keyframes glitch-anim {
-  0% { clip: rect(44px, 450px, 56px, 0); transform: skew(0.3deg); }
-  50% { clip: rect(85px, 450px, 140px, 0); transform: skew(-0.3deg); }
-  100% { clip: rect(130px, 450px, 170px, 0); transform: translate(-10px, -5px); }
+  0% { clip: rect(10px, 450px, 56px, 0); transform: skew(0.5deg); }
+  50% { clip: rect(40px, 450px, 90px, 0); transform: skew(-0.5deg) translate(-5px, -3px); }
+  100% { clip: rect(100px, 450px, 170px, 0); transform: translate(-15px, -5px) skew(0.2deg); }
 }
 
 @keyframes glitch-anim2 {
-  0% { clip: rect(85px, 450px, 140px, 0); transform: skew(-0.2deg); }
-  50% { clip: rect(130px, 450px, 170px, 0); transform: skew(0.2deg); }
-  100% { clip: rect(44px, 450px, 56px, 0); transform: translate(10px, 5px); }
+  0% { clip: rect(70px, 450px, 100px, 0); transform: skew(-0.5deg); }
+  50% { clip: rect(130px, 450px, 200px, 0); transform: skew(0.5deg) translate(5px, 3px); }
+  100% { clip: rect(10px, 450px, 56px, 0); transform: translate(10px, 5px) skew(-0.2deg); }
 }
 
 /* Flash Effect */
@@ -132,7 +132,7 @@ body, html {
   width: 100%;
   height: 2px;
   background: rgba(255, 255, 255, 0.2);
-  animation: glitch-line-move 0.5s linear;
+  animation: glitch-line-move 0.3s linear;
 }
 
 @keyframes glitch-line-move {
